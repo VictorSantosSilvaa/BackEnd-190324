@@ -4,7 +4,7 @@ const express = require('express')
 const porta = 3001
 const app = express()
 //definindo uma variavel para a rota
-const routes = require('./src/routes/routes')
+const routes = require('./src/routers/router')
 
 /* O trecho de código significa que todos os arquivos estáticos contidos no diretório "public" 
 serão disponibilizados para os clientes quando acessarem a aplicação. Por exemplo, se houver um arquivo 
