@@ -24,4 +24,12 @@ exports.getProductById = async (req, res) => {
     }
 }
 
+exports.createProduct = async(req,res)=>{
+    try {
+        const product = await productRepository.createProduct(req.body)
+        res.status(201).json(product)    
+    } catch (err) {
+        res.status(500).json({ error: err.toString() })
+    }
+}
 
