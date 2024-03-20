@@ -1,6 +1,7 @@
 const { Router } = require("express")
 
 const productController = require('../controllers/productController')
+const userController = require('../controllers/userController')
 
 const router = Router()
 
@@ -12,10 +13,10 @@ router.put('/products/:id', productController.updateProduct);
 router.delete('/products/:id', productController.deletProduct);
 
 //Usuario
-router.get('/user',userController.getAllUser);
-router.get('/user/:id', userController.getUserByID);
-router.post('/user ', userController.createUser);
-router.put('/user/:id', userController.updateUser);
-router.delete('/user/:id', userController.deleteUser);
+router.get('/users',userController.listAllUser );
+router.get('/users/:id', userController.listUserID);
+router.post('/users', userController.createUser);
+router.put('/users/:id', userController.updateUser);
+router.delete('/users/:id', userController.deleteUser);
 
 module.exports = router
