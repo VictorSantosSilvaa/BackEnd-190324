@@ -13,7 +13,7 @@ serão disponibilizados para os clientes quando acessarem a aplicação. Por exe
 app.use(express.static("public"))
 
 app.use('/', routes)
-app.listen(porta, () =>{
+app.listen(porta, () => {
     console.log("Servidor executando.")
     console.log(`http://localhost:${porta}`)
 })

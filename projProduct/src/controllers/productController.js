@@ -53,7 +53,7 @@ exports.updateProduct = async (req, res) => {
 //Deleta produto
 exports.deletProduct = async (req, res) => {
     try {
-        const product = await productRepository.deletProduct(req.params.id)
+        const product = await productRepository.deleteProduct(req.params.id)
         if (!product) {
             res.status(404).json({ error: 'Poduto não encontrado.' })
         } else {

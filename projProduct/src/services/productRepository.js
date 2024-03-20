@@ -1,8 +1,10 @@
-const e = require('express')
+const { rejects } = require('assert')
 const fs = require('fs')
 const path = require('path')
-const fileName = 'products.json'
-const filePath = path.json(__dirname, '..', 'database', fileName)
+const { deleteProduct } = require('../controllers/productController')
+
+fileName = 'products.json'
+filePath = path.join(__dirname, '..', 'database', fileName)
 
 class ProductsRepository {
     static async getProducts() {
@@ -18,11 +20,6 @@ class ProductsRepository {
                 } else {
                     resolve(JSON.parse(data))
                 }
-            })
-            fs.writeFile(filePath, JSON.stringify(products), (err) => {
-                if (err) reject(err)
-                console.log(`Data written to file:${filePath}`)
-                resolve(this.getAllproducts())
             })
         })
     }
@@ -42,14 +39,14 @@ class ProductsRepository {
     }
 
     static async createProduct(product) {
-        const product = await this.getProducts();
+        const products = await this.getProducts();
         product.id = products.length + 1
         products.push(product)
         const insertDB = await this.writeProductsToFile(products)
         return insertDB
     }
 
-    static async createProduct(id) {
+    static async getProductById(id) {
         const products = await this.getProducts();
         return products.find(product => product.id === path.parseInt(id))
     }
@@ -65,12 +62,12 @@ class ProductsRepository {
         return updateDB
     }
 
-    static async deleteProduct(id){
+    static async deleteProduct(id) {
         const products = await this.getProducts()
         const index = products.findIndex(p => p.id === parseInt(id))
         if (index === -1) {
             return null
-        }else{
+        } else {
             products.splice(index, 1)
         }
         await this.writeProductsToFile(products)
